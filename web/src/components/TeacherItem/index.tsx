@@ -3,32 +3,51 @@ import React from 'react'
 import './styles.css'
 
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
+import api from '../../services/api'
 
-function TeacherItem() {
+export interface Teacher {
+    id: number,
+    subject: string,
+    cost: number,
+    name: string,
+    avatar: string,
+    whatsapp: string,
+    bio: string
+}
+
+interface teacherItemProps {
+    teacher: Teacher
+    }
+
+
+const TeacherItem: React.FC<teacherItemProps> = ({ teacher }) => {
+
+    function createNewConnection() {
+        api.post('/connections', {
+            user_id: teacher.id
+        });
+    }
+
     return (
         <article className="teacher-item">
                     <header>
-                        <img src="https://avatars3.githubusercontent.com/u/59922096?s=460&u=15dc039579415bf83737bf301a64569d13267cbe&v=4" alt="Fhelipe Rodrigues"/>
+                        <img src={teacher.avatar} alt="Fhelipe Rodrigues"/>
                         <div>
-                            <strong>Fhelipe Rodrigues</strong>
-                            <span>Química</span>
+                            <strong>{teacher.name}</strong>
+                            <span>{teacher.subject}</span>
                         </div>
                     </header>
-                        <p>
-                            Entusiasta das melhores tecnologias de química avançada.
-                            <br /><br />
-                            Apaixonado por explodir coisas em laboratório e por mudar a vida das pessoas através de experiências. Mais de 200.000 pessoas já passaram por uma das minhas explosões.
-                        </p>
+                        <p>{teacher.bio}</p>
 
                         <footer>
                             <p>
                                 Preço/hora
-                                <strong>R$ 80, 00</strong>
+                                <strong>R$ {teacher.cost}</strong>
                             </p>
-                            <button type="button">
+                            <a onClick={()=>{createNewConnection()}} href={` https://wa.me/${teacher.whatsapp}`} type="button">
                                 <img src={whatsappIcon} alt="whatsapp"/>
                                 Entrar em contato
-                            </button>
+                            </a>
                         </footer>
                     
                 </article>
