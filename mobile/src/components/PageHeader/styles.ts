@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +18,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 32,
     maxWidth: 160,
-    marginVertical: 40,
+    marginVertical: Dimensions.get('screen').height * 0.03,
+  },
+  header:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
   }
 });
 

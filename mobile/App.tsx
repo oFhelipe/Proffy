@@ -27,7 +27,7 @@ export default function App() {
     return (
       <>
         <AppStack />
-        <StatusBar style="light" />
+        <StatusBar backgroundColor="#8257E5" style="light" />
       </>
     );
   }
